@@ -1,4 +1,5 @@
 from playwright.async_api import TimeoutError
+import time
 
 class ProductScraper:
     def __init__(self, context, url, sem, index, total):
@@ -15,6 +16,8 @@ class ProductScraper:
             print(f"📦 [{self.index}/{self.total}] Loaded {self.url}")
 
             try:
+                # Edit later to use correct wait for selector
+                time.sleep(1)
                 specs_btn = await page.wait_for_selector("div.mb-600 >> button.show-full-specs-btn", timeout=10000)
                 if specs_btn:
                     await specs_btn.scroll_into_view_if_needed(timeout=5000)
